@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const time = calculateCrackTime(password, gpu, algo);
     const formattedTime = formatTime(time);
-    console.log(formattedTime);
     crackTimeEl.textContent = 'Время взлома: ' + formattedTime;
 
     crackTimeEl.classList.add('animate');
