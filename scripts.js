@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     pwnedTimeout = setTimeout(async () => {
       try {
         const leakCount = await checkPasswordPwned(password);
+        pwnedStatus.classList.add('animate');
         if (leakCount > 0) {
           pwnedStatus.textContent = `Пароль найден в утечках ${leakCount} раз(а)!`;
           pwnedStatus.style.color = 'red';
@@ -72,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Ошибка проверки утечек:', error);
       }
     }, 500);
+
+    setTimeout(() => pwnedStatus.classList.remove('animate'), 500);
   }
 
   /*** Инициализация фоновых шариков ***/

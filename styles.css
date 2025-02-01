@@ -211,3 +211,7 @@ body {
 .crack-time.animate {
   animation: flash 0.5s ease-in-out;
 }
+
+.pwned-status.animate {
+  animation: flash 0.5s ease-in-out;
+}
