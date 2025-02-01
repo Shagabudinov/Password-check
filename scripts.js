@@ -187,9 +187,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Создаём изначальный шарик в случайной позиции
-  const initialX = Math.random() * (window.innerWidth - 10) + 5;
-  const initialY = Math.random() * (window.innerHeight - 10) + 5;
-  createBall(initialX, initialY);
+  const numberOfBalls = 33; // количество шаров
+
+  for (let i = 0; i < numberOfBalls; i++) {
+    const randomX = Math.random() * (window.innerWidth - 10) + 5;
+    const randomY = Math.random() * (window.innerHeight - 10) + 5;
+    createBall(randomX, randomY);
+  }
+
 
   // Функция анимации движения шариков
   function updateBalls() {
