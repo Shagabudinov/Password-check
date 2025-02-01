@@ -108,3 +108,15 @@ document.addEventListener('DOMContentLoaded', function () {
     createBall(e.clientX, e.clientY, background, balls);
   });
 });
+
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  setTimeout(() => {
+    loader.classList.add('fade-out');
+    loader.addEventListener('transitionend', () => {
+      loader.remove();
+    });
+  }, 1000);
+});
+
+
