@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Password Check</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Контейнер для движущихся шариков на заднем фоне -->
+  <div id="background-dots"></div>
+
+  <div class="container">
+    <h1 class="neon">Password Check</h1>
+    <div class="input-section">
+      <input type="password" id="passwordInput" placeholder="Введите пароль">
+      <div class="options">
+        <div class="option">
+          <label for="gpuSelect">Видеокарта:</label>
+          <select id="gpuSelect">
+            <option value="4060">4060</option>
+            <option value="4090">4090</option>
+          </select>
+        </div>
+        <div class="option">
+          <label for="algoSelect">Алгоритм:</label>
+          <select id="algoSelect">
+            <option value="md5">MD5</option>
+            <option value="sha">SHA</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="strength-section">
+      <div class="strength-bar">
+        <div id="strengthFill" class="strength-fill"></div>
+      </div>
+      <p id="crackTime" class="crack-time">Время взлома: -</p>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>
