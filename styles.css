@@ -196,6 +196,12 @@ body {
   color: #0ff;
 }
 
+.pwned-status {
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #0ff;
+}
+
 @keyframes flash {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
