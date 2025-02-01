@@ -13,25 +13,63 @@ export function evaluatePassword(password) {
 // Функция расчёта времени взлома
 export function calculateCrackTime(password, gpu, algo) {
   if (password.length === 0) return 0;
+
+  // Определяем размер пула символов
   let pool = 0;
   if (/[a-z]/.test(password)) pool += 26;
   if (/[A-Z]/.test(password)) pool += 26;
   if (/[0-9]/.test(password)) pool += 10;
   if (/[^a-zA-Z0-9]/.test(password)) pool += 32;
   if (pool === 0) return 0;
+
   const logCombinations = password.length * Math.log10(pool);
   const logAvgAttempts = logCombinations + Math.log10(0.5);
-  let hashRate;
-  if (algo.toLowerCase() === 'md5') {
-    hashRate = gpu === '4060' ? 10e9 : 20e9;
-  } else {
-    hashRate = gpu === '4060' ? 1e9 : 2e9;
-  }
+
+  const gpuRates = {
+    4090: {
+      md5: 20e9, // 20 миллиардов хэшей в секунду для MD5
+      sha1: 2e9, // 2 млрд для SHA-1
+      sha256: 0.2e9, // 200 млн для SHA-256
+      bcrypt: 2e6, // 2 млн для Bcrypt
+    },
+    4060: {
+      md5: 10e9,
+      sha1: 1e9,
+      sha256: 0.1e9,
+      bcrypt: 1e6,
+    },
+    3060: {
+      md5: 7e9,
+      sha1: 0.7e9,
+      sha256: 0.07e9,
+      bcrypt: 700e3,
+    },
+    2060: {
+      md5: 3e9,
+      sha1: 300e6,
+      sha256: 30e6,
+      bcrypt: 300e3,
+    },
+    1050: {
+      md5: 1e9,
+      sha1: 100e6,
+      sha256: 10e6,
+      bcrypt: 100e3,
+    },
+  };
+
+  const selectedRates = gpuRates[gpu];
+  const rate = selectedRates ? selectedRates[algo.toLowerCase()] : undefined;
+  const hashRate = rate || 1e9;
+
   const logHashRate = Math.log10(hashRate);
   const logTime = logAvgAttempts - logHashRate;
+
   if (logTime > 20) return Infinity;
+
   return Math.pow(10, logTime);
 }
+
 
 // Функция форматирования времени
 export function formatTime(seconds) {
